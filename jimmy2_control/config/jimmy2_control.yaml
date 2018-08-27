@@ -1,0 +1,47 @@
+# Ref: http://gazebosim.org/tutorials/?tut=ros_control#Createa.yamlconfigfile
+jimmy2:
+    # Publish all joint states
+    joint_state_controller:
+        type: joint_state_controller/JointStateController
+        publish_rate: 50
+
+    # Position Controllers
+    left_sho_pitch_position_controller:
+        type: effort_controllers/JointPositionController
+        joint: left_sho_pitch
+        pid: {p: 100.0, i: 0.01, d: 10.0}
+
+    left_sho_roll_position_controller:
+        type: effort_controllers/JointPositionController
+        joint: left_sho_roll
+        pid: {p: 100.0, i: 0.01, d: 10.0}
+
+    left_elbow_position_controller:
+        type: effort_controllers/JointPositionController
+        joint: left_elbow
+        pid: {p: 100.0, i: 0.01, d: 10.0}
+
+    right_sho_pitch_position_controller:
+        type: effort_controllers/JointPositionController
+        joint: right_sho_pitch
+        pid: {p: 100.0, i: 0.01, d: 10.0}
+
+    right_sho_roll_position_controller:
+        type: effort_controllers/JointPositionController
+        joint: right_sho_roll
+        pid: {p: 100.0, i: 0.01, d: 10.0}
+
+    right_elbow_position_controller:
+        type: effort_controllers/JointPositionController
+        joint: right_elbow
+        pid: {p: 100.0, i: 0.01, d: 10.0}
+
+    neck_pan_position_controller:
+        type: effort_controllers/JointPositionController
+        joint: neck_pan
+        pid: {p: 100.0, i: 0.01, d: 10.0}
+
+    neck_tilt_position_controller:
+        type: effort_controllers/JointPositionController
+        joint: neck_tilt
+        pid: {p: 100.0, i: 0.01, d: 10.0}

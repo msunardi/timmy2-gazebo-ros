@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!-- Supplemental file to support conversion of urdf/xacro to gazebo -->
+<robot>
+
+    <!-- Link1 -->
+    <gazebo reference="link1">
+        <material>Gazebo/Orange</material>
+    </gazebo>
+
+    <!-- Link2 -->
+    <gazebo reference="link2">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <material>Gazebo/Black</material>
+    </gazebo>
+
+    <!-- Link3 -->
+    <gazebo reference="link3">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <material>Gazebo/Orange</material>
+    </gazebo>
+
+    <gazebo reference="torso">
+        <self_collide>1</self_collide>
+    </gazebo>
+
+    <gazebo reference="right_hand">
+        <self_collide>1</self_collide>
+    </gazebo>
+
+    <gazebo reference="left_hand">
+        <self_collide>1</self_collide>
+    </gazebo>
+
+    <gazebo reference="left_sho_roll_block">
+        <self_collide>1</self_collide>
+    </gazebo>
+
+    <gazebo reference="right_sho_roll_block">
+        <self_collide>1</self_collide>
+    </gazebo>
+
+    <gazebo reference="neck_pan_top_bracket">
+        <self_collide>1</self_collide>
+    </gazebo>
+
+    <gazebo reference="neck_tilt_bottom_bracket">
+        <self_collide>1</self_collide>
+    </gazebo>
+
+    <gazebo reference="neck_pan_block">
+        <self_collide>1</self_collide>
+    </gazebo>
+
+    <gazebo reference="head_tilt_block">
+        <self_collide>1</self_collide>
+    </gazebo>
+</robot>

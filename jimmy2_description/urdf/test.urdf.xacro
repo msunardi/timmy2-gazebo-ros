@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<robot name="test_myrobot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:property name="mass" value="1" />
+    <xacro:property name="ax12_width" value="0.26" />
+    <xacro:property name="ax12_height" value="0.5" />
+    <xacro:property name="ax12_depth" value="0.4" />
+    <xacro:property name="axel_offset" value="0.25" /> <!-- Space btw top of beam and the each joint -->
+    <xacro:property name="width" value="0.1" /> <!-- Square dimensions (widthxwidth) of beams -->
+    <xacro:property name="height1" value="2" /> <!-- Link 1 -->
+    <xacro:property name="height2" value="1" /> <!-- Link 2 -->
+    <xacro:property name="height3" value="1" /> <!-- Link 3 -->
+    <xacro:property name="link1_origin">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:property>
+    <xacro:property name="link2_origin">
+        <origin xyz="0 0 ${ax12_height/2 - axel_offset}" rpy="0 0 0"/>
+    </xacro:property>
+    <xacro:property name="link3_origin">
+        <origin xyz="0 0 ${ax12_height/2 - axel_offset}" rpy="0 0 0"/>
+    </xacro:property>
+    <xacro:property name="ax12_block">
+        <box size="${ax12_width} ${ax12_depth} ${ax12_height}"/>
+    </xacro:property>
+    <xacro:property name="ax12_block_inertia">
+        <inertia
+            ixx="${mass/12.0*(ax12_width*ax12_width + ax12_height*ax12_height)}" ixy="0.0" ixz="0.0"
+            iyy="${mass/12.0*(ax12_width*ax12_width + ax12_height*ax12_height)}" iyz="0.0"
+            izz="${mass/12.0*(ax12_width*ax12_width + ax12_width*ax12_width)}"/>
+    </xacro:property>
+
+    <!-- Import Gazebo-customization stuff -->
+    <xacro:include filename="$(find jimmy2_description)/urdf/test.gazebo" />
+
+    <link name="world" />
+    <joint name="fixed" type="fixed">
+        <parent link="world"/>
+        <child link="link1"/>
+    </joint>
+
+    <!-- Base Link -->
+    <link name="link1">
+        <collision>
+            <xacro:insert_block name="link1_origin"/>
+            <geometry>
+                <xacro:insert_block name="ax12_block"/>
+            </geometry>
+        </collision>
+        <visual>
+            <xacro:insert_block name="link1_origin"/>
+            <geometry>
+                <xacro:insert_block name="ax12_block"/>
+            </geometry>
+            <material name="orange"/>
+        </visual>
+        <inertial>
+            <xacro:insert_block name="link1_origin"/>
+            <mass value="${mass}"/>
+            <xacro:insert_block name="ax12_block_inertia"/>
+        </inertial>
+    </link>
+
+    <!-- end of Base Link -->
+
+    <joint name="joint1" type="continuous">
+        <parent link="link1"/>
+        <child link="link2"/>
+        <origin xyz="0 ${ax12_depth} ${ax12_height - axel_offset}" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+        <dynamics damping="0.7"/>
+    </joint>
+
+    <!-- Middle Link -->
+    <link name="link2">
+        <collision>
+            <xacro:insert_block name="link2_origin"/>
+            <geometry>
+                <xacro:insert_block name="ax12_block"/>
+            </geometry>
+        </collision>
+        <visual>
+            <xacro:insert_block name="link2_origin"/>
+            <geometry>
+                <xacro:insert_block name="ax12_block"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+        <inertial>
+            <xacro:insert_block name="link2_origin"/>
+            <mass value="${mass}"/>
+            <xacro:insert_block name="ax12_block_inertia"/>
+        </inertial>
+    </link>
+
+    <!-- end of Base Link -->
+
+    <joint name="joint2" type="continuous">
+        <parent link="link2"/>
+        <child link="link3"/>
+        <origin xyz="0 ${ax12_depth} ${ax12_height - axel_offset}" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+        <dynamics damping="0.7"/>
+    </joint>
+
+    <!-- Top Link -->
+    <link name="link3">
+        <collision>
+            <xacro:insert_block name="link3_origin"/>
+            <geometry>
+                <xacro:insert_block name="ax12_block"/>
+            </geometry>
+        </collision>
+        <visual>
+            <xacro:insert_block name="link3_origin"/>
+            <geometry>
+                <xacro:insert_block name="ax12_block"/>
+            </geometry>
+            <material name="orange"/>
+        </visual>
+        <inertial>
+            <xacro:insert_block name="link3_origin"/>
+            <mass value="${mass}"/>
+            <xacro:insert_block name="ax12_block_inertia"/>
+        </inertial>
+    </link>
+
+    <!-- end of Top Link -->
+
+    <!-- Transmissions -->
+    <transmission name="tran1">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="joint1">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="motor1">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+    <transmission name="tran2">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="joint2">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="motor2">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+    <!-- Connect Gazebo to ROS -->
+    <!-- see test.gazebo -->
+</robot>
