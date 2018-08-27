@@ -58,20 +58,20 @@
     <xacro:property name="left_elbow_twist_block_origin">
         <origin xyz="0.03 0 0.1" rpy="0 0 0"/>
     </xacro:property>
-    <!--  -->
     <xacro:property name="left_elbow_twist_joint_origin">
         <origin xyz="0.16 0 -0.1" rpy="0 0 0"/>
-        <!-- <origin xyz="0 0 0" rpy="0 0 0" /> -->
     </xacro:property>
-    <!--  -->
-    <xacro:property name="left_elbow_bracket_joint_origin">
+    <!-- <xacro:property name="left_elbow_bracket_joint_origin">
         <origin xyz="0 0 -0.0" rpy="0 0 0"/>
+    </xacro:property> -->
+    <xacro:property name="left_bicep_joint_origin">
+        <origin xyz="-0.15 0.27 -0.34" rpy="0 0 0" />
     </xacro:property>
+
     <xacro:property name="left_elbow_bracket_origin">
         <origin xyz="0 0 -0.248" rpy="0 0 0"/>
     </xacro:property>
     <xacro:property name="left_elbow_joint_origin">
-        <!-- <origin xyz="0.1599 0 -0.25" rpy="0 0 0"/> -->
         <origin xyz="0.16 0 -0.258" rpy="0 0 0" />
     </xacro:property>
     <xacro:property name="left_elbow_block_origin">
@@ -106,20 +106,31 @@
     <xacro:property name="right_sho_roll_block_collision_origin">
         <origin xyz="0 0 -0.14" rpy="0 0 1.5708"/>
     </xacro:property>
-    <xacro:property name="right_elbow_bracket_joint_origin">
+    <!-- <xacro:property name="right_elbow_bracket_joint_origin">
         <origin xyz="0 0 -0.22" rpy="0 0 0"/>
+    </xacro:property> -->
+
+    <xacro:property name="right_elbow_twist_block_origin">
+        <origin xyz="0.03 0 0.1" rpy="0 0 0"/>
     </xacro:property>
+    <xacro:property name="right_elbow_twist_joint_origin">
+        <origin xyz="0.16 0 -0.1" rpy="0 0 0"/>
+    </xacro:property>
+    <xacro:property name="right_bicep_joint_origin">
+        <origin xyz="-0.15 -0.27 -0.34" rpy="0 0 0" />
+    </xacro:property>
+
     <xacro:property name="right_elbow_bracket_origin">
-        <origin xyz="0 0 -0.4" rpy="0 0 0"/>
+        <origin xyz="0 0 -0.248" rpy="0 0 0"/>
     </xacro:property>
     <xacro:property name="right_elbow_joint_origin">
-        <origin xyz="0.1599 0 -0.4085" rpy="0 0 0"/>
+        <origin xyz="0.16 0 -0.258" rpy="0 0 0"/>
     </xacro:property>
     <xacro:property name="right_elbow_block_origin">
-        <origin xyz="0 0.0168 -0.14" rpy="0 0 0"/>
+        <origin xyz="0 0.0168 -0.15" rpy="0 0 0"/>
     </xacro:property>
     <xacro:property name="right_hand_origin">
-        <origin xyz="0 0 -0.4" rpy="0 0 0"/>
+        <origin xyz="0 0 -0.45" rpy="0 0 0"/>
     </xacro:property>
     <xacro:property name="right_hand_collision_origin">
         <origin xyz="0 0 -0.55" rpy="0 0 0"/>
@@ -319,7 +330,8 @@
         <parent link="left_sho_roll_block"/>
         <child link="left_elbow_twist_block"/>
         <!-- <xacro:insert_block name="left_elbow_bracket_joint_origin"/> -->
-        <origin xyz="-0.15 0.27 -0.34" rpy="0 0 0" />
+        <!-- <origin xyz="-0.15 0.27 -0.34" rpy="0 0 0" /> -->
+        <xacro:insert_block name="left_bicep_joint_origin" />
     </joint>
 
     <link name="left_elbow_twist_block">
@@ -533,10 +545,50 @@
         </inertial>
     </link>
 
-    <joint name="right_elbow_bracket_joint" type="fixed">
+    <!-- <joint name="right_elbow_bracket_joint" type="fixed">
         <parent link="right_sho_roll_block"/>
         <child link="right_elbow_bracket"/>
         <xacro:insert_block name="right_elbow_bracket_joint_origin"/>
+    </joint> -->
+
+    <joint name="right_bicep_joint" type="fixed">
+        <parent link="right_sho_roll_block"/>
+        <child link="right_elbow_twist_block"/>
+        <!-- <xacro:insert_block name="left_elbow_bracket_joint_origin"/> -->
+        <!-- <origin xyz="-0.15 0.27 -0.34" rpy="0 0 0" /> -->
+        <xacro:insert_block name="right_bicep_joint_origin" />
+    </joint>
+
+    <link name="right_elbow_twist_block">
+        <collision>
+            <xacro:insert_block name="right_elbow_twist_block_origin"/>
+            <!-- <origin xyz="0 0 0.1" rpy="0 0 0"/> -->
+            <geometry>
+                <xacro:insert_block name="ax12_block"/>
+            </geometry>
+        </collision>
+        <visual>
+            <xacro:insert_block name="right_elbow_twist_block_origin"/>
+            <!-- <origin xyz="0 0 0.2" rpy="0 0 0"/> -->
+            <geometry>
+                <mesh filename="package://${package_name}/${mesh_dir}/neck_base.dae"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+        <inertial>
+            <xacro:insert_block name="right_elbow_twist_block_origin"/>
+            <!-- <origin xyz="0 0 0.2" rpy="0 0 0"/> -->
+            <mass value="${mass}"/>
+            <xacro:insert_block name="ax12_block_inertia"/>
+        </inertial>
+    </link>
+
+    <joint name="right_elbow_twist" type="continuous">
+        <parent link="right_elbow_twist_block"/>
+        <child link="right_elbow_bracket"/>
+        <xacro:insert_block name="right_elbow_twist_joint_origin"/>
+        <axis xyz="0 0 -1"/>
+        <dynamics damping="0.7"/>
     </joint>
 
     <!-- right Elbow -->
