@@ -1,11 +1,11 @@
 <launch>
     <!-- Ref: http://gazebosim.org/tutorials/?tut=ros_control#Createaroslaunchfile -->
     <!-- Load joint controller configurations from YAML to parameter server -->
-    <rosparam file="$(find jimmy2_control)/config/jimmy2_control.yaml" command="load"/>
+    <rosparam file="$(find timmy2_control)/config/timmy2_control.yaml" command="load"/>
 
     <!-- Load the controllers -->
     <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-        output="screen" ns="/jimmy2" args="left_sho_pitch_position_controller
+        output="screen" ns="/timmy2" args="left_sho_pitch_position_controller
         left_sho_roll_position_controller left_elbow_position_controller
         right_sho_pitch_position_controller right_sho_roll_position_controller
         right_elbow_position_controller neck_pan_position_controller
@@ -15,6 +15,6 @@
     <!-- Convert joint states to TF transforms for rviz, etc -->
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
         respawn="false" output="screen">
-        <remap from="/joint_states" to="/jimmy2/joint_states" />
+        <remap from="/joint_states" to="/timmy2/joint_states" />
     </node>
 </launch>

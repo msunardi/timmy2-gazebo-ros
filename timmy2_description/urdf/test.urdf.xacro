@@ -29,7 +29,7 @@
     </xacro:property>
 
     <!-- Import Gazebo-customization stuff -->
-    <xacro:include filename="$(find jimmy2_description)/urdf/test.gazebo" />
+    <xacro:include filename="$(find timmy2_description)/urdf/test.gazebo" />
 
     <link name="world" />
     <joint name="fixed" type="fixed">

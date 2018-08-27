@@ -41,7 +41,7 @@
     </xacro:property>
 
     <!-- Import Gazebo-customization stuff -->
-    <xacro:include filename="$(find jimmy2_description)/urdf/test.gazebo" />
+    <xacro:include filename="$(find timmy2_description)/urdf/test.gazebo" />
 
     <link name="world" />
     <joint name="fixed" type="fixed">
@@ -60,7 +60,7 @@
         <visual>
             <xacro:insert_block name="torso_origin"/>
             <geometry>
-                <mesh filename="package://jimmy2_description/meshes/torso.dae"/>
+                <mesh filename="package://timmy2_description/meshes/torso.dae"/>
             </geometry>
             <material name="orange"/>
         </visual>
@@ -95,7 +95,7 @@
         <visual>
             <xacro:insert_block name="l_sho_pitch_block_origin"/>
             <geometry>
-                <mesh filename="package://jimmy2_description/meshes/l_sho_pitch.dae"/>
+                <mesh filename="package://timmy2_description/meshes/l_sho_pitch.dae"/>
             </geometry>
             <material name="black"/>
         </visual>
@@ -127,7 +127,7 @@
         <visual>
             <xacro:insert_block name="l_sho_pitch_bracket_origin"/>
             <geometry>
-                <mesh filename="package://jimmy2_description/meshes/l_sho_bracket.dae"/>
+                <mesh filename="package://timmy2_description/meshes/l_sho_bracket.dae"/>
             </geometry>
             <material name="black"/>
         </visual>
@@ -157,7 +157,7 @@
         <visual>
             <xacro:insert_block name="l_sho_roll_block_origin"/>
             <geometry>
-                <mesh filename="package://jimmy2_description/meshes/l_sho_roll.dae"/>
+                <mesh filename="package://timmy2_description/meshes/l_sho_roll.dae"/>
             </geometry>
             <material name="black"/>
         </visual>
@@ -192,7 +192,7 @@
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <mesh filename="package://jimmy2_description/meshes/r_hand2.dae"/>
+                <mesh filename="package://timmy2_description/meshes/r_hand2.dae"/>
             </geometry>
             <material name="black"/>
         </visual>
@@ -214,7 +214,7 @@
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <mesh filename="package://jimmy2_description/meshes/r_forearm2.dae"/>
+                <mesh filename="package://timmy2_description/meshes/r_forearm2.dae"/>
             </geometry>
             <material name="black"/>
         </visual>
