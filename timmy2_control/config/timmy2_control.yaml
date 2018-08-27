@@ -16,6 +16,11 @@ timmy2:
         joint: left_sho_roll
         pid: {p: 100.0, i: 0.01, d: 10.0}
 
+    left_elbow_twist_position_controller:
+        type: effort_controllers/JointPositionController
+        joint: left_elbow_twist
+        pid: {p: 100.0, i: 0.01, d: 10.0}
+
     left_elbow_position_controller:
         type: effort_controllers/JointPositionController
         joint: left_elbow
@@ -29,6 +34,11 @@ timmy2:
     right_sho_roll_position_controller:
         type: effort_controllers/JointPositionController
         joint: right_sho_roll
+        pid: {p: 100.0, i: 0.01, d: 10.0}
+
+    right_elbow_twist_position_controller:
+        type: effort_controllers/JointPositionController
+        joint: right_elbow_twist
         pid: {p: 100.0, i: 0.01, d: 10.0}
 
     right_elbow_position_controller:

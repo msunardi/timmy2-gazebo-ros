@@ -174,7 +174,7 @@
     </xacro:property>
 
     <!-- Import Gazebo-customization stuff -->
-    <xacro:include filename="$(find timmy2_description)/urdf/test.gazebo" />
+    <xacro:include filename="$(find timmy2_description)/urdf/timmy2.gazebo" />
 
     <link name="world" />
     <joint name="base_fixed" type="fixed">
@@ -848,12 +848,34 @@
         </actuator>
     </transmission>
 
+    <transmission name="left_elbow_twist_tran">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="left_elbow_twist">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="motor5b">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
     <transmission name="right_elbow_tran">
         <type>transmission_interface/SimpleTransmission</type>
         <joint name="right_elbow">
             <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </joint>
         <actuator name="motor6">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+    <transmission name="right_elbow_twist_tran">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="right_elbow_twist">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="motor6b">
             <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
             <mechanicalReduction>1</mechanicalReduction>
         </actuator>

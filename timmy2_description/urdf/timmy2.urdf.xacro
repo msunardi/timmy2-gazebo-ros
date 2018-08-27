@@ -153,7 +153,7 @@
     </xacro:property>
 
     <!-- Import Gazebo-customization stuff -->
-    <xacro:include filename="$(find timmy2_description)/urdf/test.gazebo" />
+    <xacro:include filename="$(find timmy2_description)/urdf/timmy2.gazebo" />
 
     <link name="world" />
     <joint name="base_fixed" type="fixed">

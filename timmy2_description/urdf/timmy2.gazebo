@@ -41,6 +41,14 @@
         <self_collide>1</self_collide>
     </gazebo>
 
+    <gazebo reference="left_elbow_twist_block">
+        <self_collide>1</self_collide>
+    </gazebo>
+
+    <gazebo reference="right_elbow_twist_block">
+        <self_collide>1</self_collide>
+    </gazebo>
+
     <gazebo reference="neck_pan_top_bracket">
         <self_collide>1</self_collide>
     </gazebo>
