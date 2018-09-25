@@ -12,9 +12,26 @@
         neck_tilt_position_controller joint_state_controller"
         />
 
+<!-- NOTES:
+The robot_state_publisher (from Gazebo, I think) will publish a stream of the JointState topic (/timmy2/joint_states and /joint_states). This will override any input from joint_state_publisher.
+1. Comment the joint_state_publisher source_list param and robot_state_publisher remap to make joint_state_publisher sliders/GUI work.
+2. Comment only the robot_state_publisher remap for both to (kind of work)
+3. Uncommenting both will make joint_state_publisher not work. But moving in Gazebo will also make the model move in Rviz. -->
+
+    <!-- Joint state publisher GUI -->
+    <param name="use_gui" value="${arg gui}"/>
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+        <rosparam param="source_list">["timmy2/joint_states", "joint_states"]</rosparam>
+    </node>
+
     <!-- Convert joint states to TF transforms for rviz, etc -->
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
         respawn="false" output="screen">
-        <remap from="/joint_states" to="/timmy2/joint_states" />
+        <!--remap from="/joint_states" to="/timmy2/joint_states" /-->
     </node>
+
+    <!-- Launch rviz -->
+    <arg name="gui" default="true" />
+    <arg name="rvizconfig" default="$(find timmy2_description)/rviz/timmy2.rviz" />
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
 </launch>
