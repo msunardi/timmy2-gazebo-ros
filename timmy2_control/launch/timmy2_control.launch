@@ -21,7 +21,7 @@ The robot_state_publisher (from Gazebo, I think) will publish a stream of the Jo
     <!-- Joint state publisher GUI -->
     <param name="use_gui" value="${arg gui}"/>
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
-        <rosparam param="source_list">["timmy2/joint_states", "joint_states"]</rosparam>
+        <rosparam param="source_list">["timmy2/joint_states"]</rosparam>
     </node>
 
     <!-- Convert joint states to TF transforms for rviz, etc -->
