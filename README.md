@@ -67,7 +67,7 @@ $ roslaunch timmy2_description timmy_description.launch
 
 **NOTE:** The current configuration tries to make `joint_state_publisher` and Gazebo work at the same time. This is achieved by commenting the `remap` argument for `robot_state_publisher` in `timmy2_control/launch/timmy2_control.launch`
 
-```
+```XML
 <!-- Joint state publisher GUI -->
 <param name="use_gui" value="${arg gui}"/>
 <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
@@ -97,7 +97,7 @@ $ roslaunch timmy2_description timmy_description.launch
 
 1.  Uncomment `rospoaram` line for `joint_state_publisher` and `remap` for `robot_state_publisher` in `timmy2_control/launch/timmy2_control.launch`
 
-    ```
+    ```XML
     <!-- Joint state publisher GUI -->
     <param name="use_gui" value="${arg gui}"/>
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
